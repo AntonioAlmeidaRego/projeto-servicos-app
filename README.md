@@ -12,6 +12,7 @@ Desenvolvimento do Projeto de Servições Gerais (Aplicativo)
 "npm": "6.14.5"
 "npx": ""
 
+"native-base": "^2.13.5",
 "react-native-gesture-handler": "^1.6.1",
 "react-native-navigation": "^3.1.2",
 "react-native-vector-icons": "^6.6.0",
