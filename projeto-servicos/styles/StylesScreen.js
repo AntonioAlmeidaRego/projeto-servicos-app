@@ -147,6 +147,16 @@ export default class StylesScreen{
         return styles.position;
     }
 
+    static createTop(number: number){
+        const styles = StyleSheet.create({
+            top:{
+                top: number,
+            }
+        });
+
+        return styles.top;
+    }
+
     static createPositionAbsoluteRight(value: number){
         const styles = StyleSheet.create({
             position:{
@@ -592,11 +602,11 @@ export default class StylesScreen{
     static createRight() {
         const styles = StyleSheet.create({
             right:{
-                flex: 1,
                 marginLeft: 'auto',
                 alignItems: 'center',
                 justifyContent: 'center',
-                right: 1,
+                right: 0,
+                flexWrap: 'wrap-reverse',
             }
         });
 
@@ -638,7 +648,7 @@ export default class StylesScreen{
         const styles = StyleSheet.create({
             left:{
                 flexWrap: 'wrap-reverse',
-                left: 1,
+                left: 0,
                 marginRight: 'auto',
                 alignItems: 'center',
                 justifyContent: 'center',
