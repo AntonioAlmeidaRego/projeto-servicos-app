@@ -30,7 +30,7 @@ export default class LoginComponent extends React.Component{
                 <Components.NT.View style={[StylesScreen.createHeight('auto'),
                     {backgroundColor: 'rgba(34, 45, 159, 0.7)'}
                 ]}>
-                    <BoxTextComponent>
+                    <BoxTextComponent style={{top: 40}}>
                         <TextComponent
                             text={"ki-tem"}
                             upper
@@ -39,7 +39,7 @@ export default class LoginComponent extends React.Component{
                             fontFamily={'Roboto-Bold'}
                         />
                     </BoxTextComponent>
-                    <BoxTextComponent style={{top: 75}}>
+                    <BoxTextComponent style={{top: 105}}>
                         <TextComponent
                             text={"Guia de Profissionais \n" +
                             "e Serviços"}
