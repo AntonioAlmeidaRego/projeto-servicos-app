@@ -1,6 +1,7 @@
-import styled from 'styled-components/native';
 
-export const LoginBackgroudStyle = styled.View`position: relative;
+import styled from 'styled-components/native';
+/*
+* export const LoginBackgroudStyle = styled.View`position: relative;
 width: 375px;
 height: 667px;
 
@@ -31,7 +32,7 @@ export const LoginBoxTitleStyle = styled.View`position: absolute;
 width: 54px;
 height: 16px;
 left: 112px;
-top: 15px;  
+top: 15px;
 `
 
 export const LoginBoxInputStyle = styled.View`position: absolute;
@@ -54,8 +55,8 @@ export const LoginBoxInputBorderStyle = styled.TextInput.attrs({
         fontSize: 16,
     },
     placeholder: 'E-mail'
-})` 
-border: 0.5px solid #A6AAB4; 
+})`
+border: 0.5px solid #A6AAB4;
 padding-left: 35px;
 border-radius: 6px;`;
 
@@ -83,8 +84,8 @@ export const LoginBoxPasswordBorderStyle = styled.TextInput.attrs({
     },
     placeholder: 'Senha',
     secureTextEntry: true,
-})` 
-border: 0.5px solid #A6AAB4; 
+})`
+border: 0.5px solid #A6AAB4;
 padding-left: 35px;
 border-radius: 6px;`;
 
@@ -100,10 +101,7 @@ right: 0px;
 top: 0px;
 bottom: 0px;
 
-/* purple */
-
 background: #613EEA;
-/* purple button shadow */
 
 box-shadow: 0px 8px 20px rgba(97, 62, 234, 0.32);
 border-radius: 6px;`
@@ -118,16 +116,31 @@ font-style: normal;
 font-weight: 600;
 font-size: 16px;
 line-height: 24px;
-/* or 150% */
 
 display: flex;
 align-items: center;
 text-align: center;
 letter-spacing: 0.1px;
 
-/* white */
-
 color: #FFFFFF;`
 
+
+
+
+*
+* */
+export default class StylesCSS{
+    static onView(css){
+        return styled.View`${css}`;
+    }
+
+    static onTextInput(css?: string){
+        return styled.TextInput`${css}`;
+    }
+
+    static onTouchableOpacity(css){
+        return styled.TouchableOpacity`${css}`;
+    }
+}
 
 

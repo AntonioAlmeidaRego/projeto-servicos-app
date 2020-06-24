@@ -232,10 +232,10 @@ export default class StylesScreen{
         return styles.fontSize;
     }
 
-    static createHeight(height: number){
+    static createHeight(height: number | string){
         const styles = StyleSheet.create({
             height:{
-                height: height,
+                height: height == 'auto' ? Dimensions.get('window').height : height,
             }
         });
         return styles.height;
@@ -344,6 +344,8 @@ export default class StylesScreen{
             container:{
                 flex: 1,
                 justifyContent: 'center',
+                alignSelf: 'center',
+                alignItems: 'center',
             }
         });
         return styles.container;
