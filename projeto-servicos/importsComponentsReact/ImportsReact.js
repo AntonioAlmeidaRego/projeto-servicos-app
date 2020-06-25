@@ -23,8 +23,8 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-
-
+import Validation from '../app/util/Validation';
+import ArrayUtil from '../app/util/ArrayUtil';
 
 module.exports = {
     NT,
@@ -38,5 +38,7 @@ module.exports = {
     Tabs, Text, Textarea, Thumbnail, Title, Toast, View,
     MaterialIcons, MaterialCommunityIcons, Feather, Octicons, Zocial,
     SimpleLineIcons, Fontisto, FontAwesome5Pro, FontAwesome, Entypo, AntDesign,
-    FontAwesome5, EvilIcons
+    FontAwesome5, EvilIcons,
+    Validation,
+    ArrayUtil
 };

@@ -4,7 +4,6 @@ import StylesScreen from '../styles/StylesScreen';
 
 export default class TextComponent extends React.Component{
     render() {
-        console.log(this.props.fontFamily)
         return (
             <View style={StylesScreen.createContainerText()}>
                 <Text style={[StylesScreen.createText(this.props.color, this.props.size,

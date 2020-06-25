@@ -58,7 +58,6 @@ export default class AlertComponent extends React.Component {
     };
 
     render() {
-        console.log();
         const type = this.onType(this.props.type);
         return <Components.NT.Modal visible={this.props.onVisible} transparent>
             <Components.NT.View style={[

@@ -14,14 +14,22 @@ import InputComponent from './components/InputComponent';
 import {View} from 'react-native';
 import AlertComponent from '../alerts/AlertComponent';
 import AddIconToFieldComponent from '../AddIconToFieldComponent';
-
-
+const validation = new Components.Validation();
+const arrayUtil = new Components.ArrayUtil();
 
 export default class LoginComponent extends React.Component{
 
     state={
-        visible: false,
+        isError: false,
+        isNotFound: false,
         buttonValid: false,
+        isLoading: false,
+        isDisabled: false,
+        inputs: [],
+    }
+
+    componentWillUnmount() {
+        arrayUtil.clear();
     }
 
     onStop = async ()=>{
@@ -30,11 +38,43 @@ export default class LoginComponent extends React.Component{
         });
     }
 
-    onAlert = async ()=>{
+    onSetInput = async(id, val)=>{
+        validation.setValInput(id, val);
+        this.setState({
+            inputs: validation.toArray,
+        });
+    }
+
+    onLoading(){
+        return (
+            <Components.NT.ActivityIndicator color="#fff" size={30} />
+        )
+    }
+
+    onRequest = async ()=>{
         this.setState({
             ...this.state.buttonValid = true,
-            visible: true,
         });
+        if(!arrayUtil.isEmpty()){
+            if(!arrayUtil.isAttrsEmpty('val')){
+                const statusOK = 200;
+                const statusNOTFOUND = 405;
+                const statusERROR = 500;
+                const result = this.props.onActionRequest;
+                if(statusNOTFOUND == result){
+                    this.setState({
+                        isError: false,
+                        isNotFound: true,
+                    });
+                }else if(statusERROR == result){
+                    this.setState({
+                        ...this.state.buttonValid = true,
+                        isError: true,
+                        isNotFound: false,
+                    });
+                }
+            }
+        }
     }
 
     render() {
@@ -44,9 +84,12 @@ export default class LoginComponent extends React.Component{
 
         return (
             <Components.Content>
-                <AlertComponent onVisible={this.state.visible}
-                                onClose={()=>this.setState({...this.state.visible = false})} type={'danger'}
-                                title={'aviso!'} description={'Usuário Inválido. Por favor tente novamente!'}/>
+                <AlertComponent onVisible={this.state.isNotFound}
+                                onClose={()=>this.setState({...this.state.isNotFound = false})} type={'info'}
+                                description={this.props.notFound}/>
+                <AlertComponent onVisible={this.state.isError}
+                                onClose={()=>this.setState({...this.state.isError = false})} type={'danger'}
+                                description={this.props.error}/>
                 <Components.NT.View style={[StylesScreen.createHeight('auto'),
                     {backgroundColor: 'rgba(34, 45, 159, 0.7)'}
                 ]}>
@@ -82,6 +125,8 @@ export default class LoginComponent extends React.Component{
                         <BoxInputComponent style={{top: 60}}>
                             <BoxContainerItemComponent>
                                 <InputComponent
+                                    id={"email"}
+                                    onSet={this.onSetInput}
                                     onStop={this.onStop}
                                     valid={this.state.buttonValid}
                                     placeholder={'E-mail'}
@@ -91,22 +136,30 @@ export default class LoginComponent extends React.Component{
                         </BoxInputComponent>
                         <BoxInputComponent style={{top: 130}}>
                             <BoxContainerItemComponent>
-                                <InputComponent onStop={this.onStop}
-                                                valid={this.state.buttonValid}
-                                                secureTextEntry
-                                                placeholder={'Senha'}></InputComponent>
+                                <InputComponent
+                                    id={"password"}
+                                    onSet={this.onSetInput}
+                                    onStop={this.onStop}
+                                    valid={this.state.buttonValid}
+                                    secureTextEntry
+                                    placeholder={'Senha'} />
                                 {this.props.iconPassword}
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
                         <BoxLoginButton>
                             <BoxContainerItemComponent>
-                                <ButtonSignIn onPress={() => this.onAlert()}>
-                                    <TextComponent
-                                        text={'Entrar'}
-                                        color={'#fff'}
-                                        size={16}
-                                        fontFamily={'Sarabun-Bold'}
-                                    />
+                                <ButtonSignIn disabled={this.state.isDisabled} onPress={() => this.onRequest()}>
+                                    {this.state.isLoading &&(
+                                        this.onLoading()
+                                    )}
+                                    {!this.state.isLoading && (
+                                        <TextComponent
+                                            text={'Entrar'}
+                                            color={'#fff'}
+                                            size={16}
+                                            fontFamily={'Sarabun-Bold'}
+                                        />
+                                    )}
                                 </ButtonSignIn>
                             </BoxContainerItemComponent>
                         </BoxLoginButton>

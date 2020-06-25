@@ -32,6 +32,7 @@ export default class InputComponent extends React.Component{
     }
 
     onChange = async (val: string)=>{
+        this.props.onSet(this.props.id, val);
         this.setState({
             val: val,
             ...this.required.required = false,

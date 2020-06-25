@@ -33,18 +33,13 @@ const list = [
 
 export default class App extends React.Component{
 
+    onAction(){
+        return 500;
+    }
+
     onScreenLogin(){
         return (
             <LoginComponent
-                backgroudCSS={styles.backgroundCSS}
-                titleCSS={styles.titleCSS}
-                subTitleCSS={styles.subTitleCSS}
-                boxLogin={styles.boxLogin}
-                boxLoginTitle={styles.boxLoginTitle}
-                boxLoginInputUsername={styles.boxLoginInputUsername}
-                inputUsername={styles.inputUsername}
-                boxLoginInputPassword={styles.boxLoginInputPassword}
-                inputPassword={styles.inputPassword}
                 iconUsername={
                     <Icon style={{ position: 'absolute', left: 4, top: 12 }}>
                         <AntDesign name={'user'} size={25} color={'#000'}/>
@@ -61,11 +56,17 @@ export default class App extends React.Component{
                 buttonSignIn={
                     styles.buttonSignIn
                 }
-                boxForgotPassword={
-                    styles.boxForgotPassword
+                success={
+                    () => alert("OK")
                 }
-                boxCreatAccount={
-                    styles.boxCreatAccount
+                error={
+                    'ERRO no Servidor, Tente Mais Tarde!'
+                }
+                notFound={
+                    'Usuário Inválido. Por favor tente novamente!'
+                }
+                onActionRequest={
+                    this.onAction()
                 }
             />
         )
