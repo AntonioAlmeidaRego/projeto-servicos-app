@@ -7,25 +7,18 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {View} from 'react-native';
 import LoginComponent from './projeto-servicos/components/loginComponents/LoginComponent';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Icon} from "native-base";
+import {Icon} from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListComponent from './projeto-servicos/components/ListComponent';
 import BoxItemComponent from './projeto-servicos/components/BoxItemComponent';
 import BoxItemAvatarComponent from './projeto-servicos/components/BoxItemAvatarComponent';
 import TextComponent from './projeto-servicos/components/TextComponent';
 import Component from './projeto-servicos/importsComponentsReact/ImportsReact';
-import SpaceTopComponent from './projeto-servicos/components/space/SpaceTopComponent';
 import FooterMenuComponent from './projeto-servicos/components/FooterMenuComponent';
+
 const styles = require("./projeto-servicos/components/loginComponents/styles/styles");
 
 const list = [
@@ -123,7 +116,7 @@ export default class App extends React.Component{
 
     render(){
       return (
-          this.onScreenListCategorias()
+          this.onScreenLogin()
       );
     }
 }

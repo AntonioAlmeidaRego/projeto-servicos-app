@@ -11,22 +11,34 @@ import SpaceTopComponent from '../space/SpaceTopComponent';
 import BoxItemComponent from './components/BoxItemComponent';
 import BoxInputComponent from './components/BoxInputComponent';
 import InputComponent from './components/InputComponent';
+import {View} from 'react-native';
+import AlertComponent from '../alerts/AlertComponent';
+import AddIconToFieldComponent from '../AddIconToFieldComponent';
 
 
 
 export default class LoginComponent extends React.Component{
 
+    state={
+        visible: false,
+    }
+
+    onAlert = async ()=>{
+        this.setState({
+            ...this.state.visible = true,
+        });
+    }
+
     render() {
-        const Background = StylesCSS.onView(this.props.backgroudCSS);
 
         const BoxLoginButton = StylesCSS.onView(this.props.boxLoginButton)
         const ButtonSignIn = StylesCSS.onTouchableOpacity(this.props.buttonSignIn);
 
-        const BoxForgotPassword = StylesCSS.onView(this.props.boxForgotPassword);
-
-        const BoxCreatAccount = StylesCSS.onView(this.props.boxCreatAccount);
         return (
             <Components.Content>
+                <AlertComponent onVisible={this.state.visible}
+                                onClose={()=>this.setState({...this.state.visible = false})} type={'danger'}
+                                title={'aviso!'} description={'Usuário Inválido. Por favor tente novamente!'}/>
                 <Components.NT.View style={[StylesScreen.createHeight('auto'),
                     {backgroundColor: 'rgba(34, 45, 159, 0.7)'}
                 ]}>
@@ -65,17 +77,29 @@ export default class LoginComponent extends React.Component{
                                     placeholder={'E-mail'}
                                 />
                                 {this.props.iconUsername}
+                                <AddIconToFieldComponent
+                                    right
+                                    text={<TextComponent fontFamily={'Sarabun-Bold'} upper size={10} color={'#EA6A6A'} text={'Campo Obrigatório!'}/>}
+                                    icon={<Components.Icon><Components.Feather name={'alert-triangle'} size={18}
+                                                                               color={'#EA6A6A'}/></Components.Icon>}
+                                />
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
                         <BoxInputComponent style={{top: 130}}>
                             <BoxContainerItemComponent>
                                 <InputComponent secureTextEntry placeholder={'Senha'}></InputComponent>
                                 {this.props.iconPassword}
+                                <AddIconToFieldComponent
+                                    right
+                                    text={<TextComponent fontFamily={'Sarabun-Bold'} upper size={10} color={'#EA6A6A'} text={'Campo Obrigatório!'}/>}
+                                    icon={<Components.Icon><Components.Feather name={'alert-triangle'} size={18}
+                                                                               color={'#EA6A6A'}/></Components.Icon>}
+                                />
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
                         <BoxLoginButton>
                             <BoxContainerItemComponent>
-                                <ButtonSignIn>
+                                <ButtonSignIn onPress={() => this.onAlert()}>
                                     <TextComponent
                                         text={'Entrar'}
                                         color={'#fff'}

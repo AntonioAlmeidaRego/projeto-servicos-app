@@ -22,6 +22,7 @@ import Zocial from 'react-native-vector-icons/Zocial';
 import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 
 
@@ -37,5 +38,5 @@ module.exports = {
     Tabs, Text, Textarea, Thumbnail, Title, Toast, View,
     MaterialIcons, MaterialCommunityIcons, Feather, Octicons, Zocial,
     SimpleLineIcons, Fontisto, FontAwesome5Pro, FontAwesome, Entypo, AntDesign,
-    FontAwesome5
+    FontAwesome5, EvilIcons
 };

@@ -6,7 +6,7 @@ import StylesScreen from '../styles/StylesScreen';
 export default class RowComponent extends React.Component{
     render() {
         return (
-            <Components.NT.View style={StylesScreen.createFlexDirection('row')}>
+            <Components.NT.View style={[StylesScreen.createFlexDirection('row'), this.props.style]}>
                 {this.props.children}
             </Components.NT.View>
         );
