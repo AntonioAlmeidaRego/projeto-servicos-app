@@ -34,7 +34,7 @@ const list = [
 export default class App extends React.Component{
 
     onAction(){
-        return 500;
+        return 404;
     }
 
     onScreenLogin(){
@@ -63,7 +63,7 @@ export default class App extends React.Component{
                     'ERRO no Servidor, Tente Mais Tarde!'
                 }
                 notFound={
-                    'Usuário Inválido. Por favor tente novamente!'
+                    'Usuário Inválido!'
                 }
                 onActionRequest={
                     this.onAction()

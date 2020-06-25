@@ -5,6 +5,7 @@ import StylesScreen from '../../../styles/StylesScreen';
 import Required from '../../../app/model/Required';
 import TextComponent from '../../TextComponent';
 import AddIconToFieldComponent from '../../AddIconToFieldComponent';
+import AlertComponent from '../../alerts/AlertComponent';
 
 export default class InputComponent extends React.Component{
     constructor(props: Readonly<P>) {
@@ -32,6 +33,11 @@ export default class InputComponent extends React.Component{
     }
 
     onChange = async (val: string)=>{
+        if(this.props.type !== undefined){
+            this.setState({
+                ...this.type.required = true,
+            });
+        }
         this.props.onSet(this.props.id, val);
         this.setState({
             val: val,

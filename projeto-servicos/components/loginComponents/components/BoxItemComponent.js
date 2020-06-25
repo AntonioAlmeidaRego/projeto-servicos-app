@@ -10,7 +10,7 @@ export default class BoxItemComponent extends React.Component{
                 StylesScreen.createPositionAbsolute(),
                 StylesScreen.createContainer(),
                 StylesScreen.createBox('center', 'center',
-                    'center', 286, 325, 12, null),
+                    'center', this.props.width, this.props.height, 12, null),
                 StylesScreen.createColorBackground('#fff'),
                 {top: 200}
             ]}>

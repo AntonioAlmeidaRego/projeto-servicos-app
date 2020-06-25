@@ -227,7 +227,7 @@ export default class StylesScreen{
     static createWidth(width: number | string){
         const styles = StyleSheet.create({
             width:{
-                width: width,
+                width: width == 'auto' ? Dimensions.get('window').width : width,
             }
         });
         return styles.width;

@@ -5,8 +5,10 @@ var array = [];
 export default class ArrayUtil {
     private k: number;
 
-    public object(): object{
-        return array[this.k];
+    public object(id: number | string): object{
+        return array.filter(function (object) {
+            return object.id == id;
+        })[0];
     }
 
     public setObject(id: number | string, val: string | number): void{
@@ -28,7 +30,6 @@ export default class ArrayUtil {
             const arrayKeys = Object.keys(array[i]);
             for(let j = 0; j < arrayKeys.length; j++){
                 if(arrayKeys[i] == attr){
-                    console.log(attr);
                     if(array[i][attr] != ""){
                         increment++;
                     }

@@ -22,7 +22,7 @@ export default class AlertComponent extends React.Component {
                 borderColor: '#EA6A6A',
                 icon: <Components.Icon><Components.Feather name={'alert-triangle'} size={30}
                                                            color={'#fff'}/></Components.Icon>,
-                color: '#686767',
+                color: '#fff',
             },
             {
                 type: 'success',
@@ -59,86 +59,86 @@ export default class AlertComponent extends React.Component {
 
     render() {
         const type = this.onType(this.props.type);
-        return <Components.NT.Modal visible={this.props.onVisible} transparent>
-            <Components.NT.View style={[
-                {
-                    position: 'relative',
-                    width: '75%',
-                    height: 55,
-                    backgroundColor: '#FFFFFF',
-                    borderWidth: 2,
-                    borderColor: type.borderColor,
-                    borderRadius: 10,
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    top: StylesScreen.createHeight('auto').height / 4,
-                },
-            ]}>
+        return <Components.NT.View style={[
+            {
+                position: 'absolute',
+                width: 245,
+                height: 48,
+                backgroundColor: '#d05f5f',
+                borderWidth: 2,
+                borderColor: type.borderColor,
+                borderRadius: 10,
+                alignSelf: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                right: 115,
+                left: -95,
+                top: 28,
+            },
+        ]}>
+            <Components.NT.View style={{
+                position: 'absolute',
+                width: 50,
+                height: 48,
+                left: -2,
+                top: -2,
+                alignSelf: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: type.backgroundColor,
+                borderBottomLeftRadius: 12,
+                borderTopLeftRadius: 12,
+            }}>
+                {type.icon}
+            </Components.NT.View>
+            <Components.NT.View style={{
+                position: 'absolute',
+                width: 50,
+                height: 152,
+                left: 50,
+                top: 0,
+                borderRadius: 10,
+            }}>
                 <Components.NT.View style={{
                     position: 'absolute',
-                    width: 50,
-                    height: 55,
-                    left: -2,
-                    top: -2,
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: type.backgroundColor,
-                    borderBottomLeftRadius: 12,
-                    borderTopLeftRadius: 12,
+                    width: 150,
+                    height: 65,
+                    left: 5,
+                    top: 5,
                 }}>
-                    {type.icon}
-                </Components.NT.View>
-                <Components.NT.View style={{
-                    position: 'absolute',
-                    width: 50,
-                    height: 152,
-                    left: 50,
-                    top: 0,
-                    borderRadius: 10,
-                }}>
-                    <Components.NT.View style={{
-                        position: 'absolute',
-                        width: 200,
-                        height: 65,
-                        left: 5,
-                        top: 5,
-                    }}>
-                        <TextComponent
-                            text={this.props.description.toString().substring(0, 70)}
-                            fontFamily={'Sarabun-Bold'}
-                            color={type.color}
-                            size={14}
-                            upper
-                            lineHeight={23}
-                        />
-                    </Components.NT.View>
-                </Components.NT.View>
-                <Components.NT.View style={{
-                    position: 'absolute',
-                    width: 40,
-                    height: 52,
-                    left: '83%',
-                    top: 0,
-                }}>
-                    <Components.NT.View style={{
-                        position: 'absolute',
-                        width: 30,
-                        height: 30,
-                        left: '50%',
-                        top: 10,
-                    }}>
-                        <Components.Icon onPress={() => this.onClose()}>
-                            <Components.EvilIcons
-                                name={'close'}
-                                size={25}
-                                color={'#C1B4B4'}
-                            />
-                        </Components.Icon>
-                    </Components.NT.View>
+                    <TextComponent
+                        text={this.props.description.toString().substring(0, 70)}
+                        fontFamily={'Sarabun-Bold'}
+                        color={type.color}
+                        size={14}
+                        upper
+                        lineHeight={23}
+                    />
                 </Components.NT.View>
             </Components.NT.View>
-        </Components.NT.Modal>;
+            <Components.NT.View style={{
+                position: 'absolute',
+                width: 100,
+                height: 52,
+                left: 100,
+                top: 0,
+            }}>
+                <Components.NT.View style={{
+                    position: 'absolute',
+                    width: 100,
+                    height: 30,
+                    left: 112,
+                    top: 12,
+                }}>
+                    <Components.Icon onPress={() => this.onClose()}>
+                        <Components.EvilIcons
+                            name={'close-o'}
+                            size={25}
+                            color={'#fff'}
+                        />
+                    </Components.Icon>
+                </Components.NT.View>
+            </Components.NT.View>
+        </Components.NT.View>;
     }
 }

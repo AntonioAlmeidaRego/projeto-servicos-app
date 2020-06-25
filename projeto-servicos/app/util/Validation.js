@@ -16,4 +16,17 @@ export default class Validation {
             this._arrayUtil.setObject(id, val);
         }
     }
+
+    isEmail(str: string): boolean{
+        let array = str.split("");
+        for(let i = 0;i< array.length;i++){
+            if(array[i] == "@"){
+                let res = str.substring(i, str.length);
+                if((res == "@hotmail.com") || (res == "@gmail.com") || (res == "@outlook.com")){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

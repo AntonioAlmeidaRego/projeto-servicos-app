@@ -1,19 +1,15 @@
 import React from 'react';
 import Components from '../../importsComponentsReact/ImportsReact'
 
-import {Input, Content} from 'native-base';
 import TextComponent from '../TextComponent';
 import StylesCSS from '../../styles/StylesCSS';
 import StylesScreen from '../../styles/StylesScreen';
 import BoxContainerItemComponent from './components/BoxContainerItemComponent';
 import BoxTextComponent from './components/BoxTextComponent';
-import SpaceTopComponent from '../space/SpaceTopComponent';
 import BoxItemComponent from './components/BoxItemComponent';
 import BoxInputComponent from './components/BoxInputComponent';
 import InputComponent from './components/InputComponent';
-import {View} from 'react-native';
 import AlertComponent from '../alerts/AlertComponent';
-import AddIconToFieldComponent from '../AddIconToFieldComponent';
 const validation = new Components.Validation();
 const arrayUtil = new Components.ArrayUtil();
 
@@ -26,6 +22,8 @@ export default class LoginComponent extends React.Component{
         isLoading: false,
         isDisabled: false,
         inputs: [],
+        top: 0,
+        isEmail: false,
     }
 
     componentWillUnmount() {
@@ -40,6 +38,18 @@ export default class LoginComponent extends React.Component{
 
     onSetInput = async(id, val)=>{
         validation.setValInput(id, val);
+        if(id == "email" && !validation.isEmail(val)){
+            this.setState({
+                top: 40,
+                isEmail: true,
+            });
+        }else if(id == "email" && validation.isEmail(val)){
+            this.setState({
+                top: 0,
+                isEmail: false
+            });
+        }
+
         this.setState({
             inputs: validation.toArray,
         });
@@ -57,20 +67,29 @@ export default class LoginComponent extends React.Component{
         });
         if(!arrayUtil.isEmpty()){
             if(!arrayUtil.isAttrsEmpty('val')){
-                const statusOK = 200;
-                const statusNOTFOUND = 405;
-                const statusERROR = 500;
-                const result = this.props.onActionRequest;
-                if(statusNOTFOUND == result){
+                if(validation.isEmail(arrayUtil.object('email').val)){
+                    const statusOK = 200;
+                    const statusNOTFOUND = 404;
+                    const statusERROR = 500;
+                    const result = this.props.onActionRequest;
+                    if(statusNOTFOUND == result){
+                        this.setState({
+                            isError: false,
+                            isNotFound: true,
+                            top: 45,
+                        });
+                    }else if(statusERROR == result){
+                        this.setState({
+                            ...this.state.buttonValid = true,
+                            isError: true,
+                            isNotFound: false,
+                            top: 45,
+                        });
+                    }
+                }else{
                     this.setState({
-                        isError: false,
-                        isNotFound: true,
-                    });
-                }else if(statusERROR == result){
-                    this.setState({
-                        ...this.state.buttonValid = true,
-                        isError: true,
-                        isNotFound: false,
+                        top: 40,
+                        isEmail: true,
                     });
                 }
             }
@@ -84,12 +103,7 @@ export default class LoginComponent extends React.Component{
 
         return (
             <Components.Content>
-                <AlertComponent onVisible={this.state.isNotFound}
-                                onClose={()=>this.setState({...this.state.isNotFound = false})} type={'info'}
-                                description={this.props.notFound}/>
-                <AlertComponent onVisible={this.state.isError}
-                                onClose={()=>this.setState({...this.state.isError = false})} type={'danger'}
-                                description={this.props.error}/>
+
                 <Components.NT.View style={[StylesScreen.createHeight('auto'),
                     {backgroundColor: 'rgba(34, 45, 159, 0.7)'}
                 ]}>
@@ -112,7 +126,7 @@ export default class LoginComponent extends React.Component{
                             textAlign={'center'}
                         />
                     </BoxTextComponent>
-                    <BoxItemComponent>
+                    <BoxItemComponent width={286} height={325 + this.state.top}>
                         <BoxTextComponent style={{top: 20}}>
                             <TextComponent
                                 textAlign={'center'}
@@ -121,8 +135,23 @@ export default class LoginComponent extends React.Component{
                                 size={22}
                                 fontFamily={'Questrial-Regular'}
                             />
+                            {this.state.isError &&(
+                                <AlertComponent onVisible={this.state.isError}
+                                                onClose={()=>this.setState({...this.state.isError = false, top: 0})} type={'danger'}
+                                                description={this.props.error}/>
+                            )}
+                            {this.state.isNotFound &&(
+                                <AlertComponent onVisible={this.state.isNotFound}
+                                                onClose={()=>this.setState({...this.state.isNotFound = false, top: 0})} type={'danger'}
+                                                description={this.props.notFound}/>
+                            )}
+                            {this.state.isEmail &&(
+                                <AlertComponent type={'danger'} description={'Email Inválido!'}
+                                                onClose={()=>this.setState({...this.state.isEmail = false, top: 0})}
+                                />
+                            )}
                         </BoxTextComponent>
-                        <BoxInputComponent style={{top: 60}}>
+                        <BoxInputComponent style={{top: parseInt(60 + this.state.top)}}>
                             <BoxContainerItemComponent>
                                 <InputComponent
                                     id={"email"}
@@ -134,7 +163,7 @@ export default class LoginComponent extends React.Component{
                                 {this.props.iconUsername}
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
-                        <BoxInputComponent style={{top: 130}}>
+                        <BoxInputComponent style={{top: parseInt(130 + this.state.top)}}>
                             <BoxContainerItemComponent>
                                 <InputComponent
                                     id={"password"}
@@ -148,7 +177,7 @@ export default class LoginComponent extends React.Component{
                         </BoxInputComponent>
                         <BoxLoginButton>
                             <BoxContainerItemComponent>
-                                <ButtonSignIn disabled={this.state.isDisabled} onPress={() => this.onRequest()}>
+                                <ButtonSignIn style={{top: parseInt(this.state.top)}} disabled={this.state.isDisabled} onPress={() => this.onRequest()}>
                                     {this.state.isLoading &&(
                                         this.onLoading()
                                     )}
@@ -163,7 +192,7 @@ export default class LoginComponent extends React.Component{
                                 </ButtonSignIn>
                             </BoxContainerItemComponent>
                         </BoxLoginButton>
-                        <BoxTextComponent style={{top: 240}}>
+                        <BoxTextComponent style={{top: parseInt(240 + this.state.top)}}>
                             <Components.Button transparent>
                                 <TextComponent
                                     text={'Esqueçeu a senha'}
@@ -174,7 +203,7 @@ export default class LoginComponent extends React.Component{
                                 />
                             </Components.Button>
                         </BoxTextComponent>
-                        <BoxTextComponent style={{top: 270}}>
+                        <BoxTextComponent style={{top: parseInt(270 + this.state.top)}}>
                             <Components.Button transparent>
                                 <TextComponent
                                     text={'Criar uma nova conta'}
