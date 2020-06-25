@@ -2,6 +2,7 @@ import React from 'react';
 import Components from '../../importsComponentsReact/ImportsReact';
 import TextComponent from '../TextComponent';
 import {Dimensions} from 'react-native';
+import StylesScreen from '../../styles/StylesScreen';
 
 export default class AlertComponent extends React.Component {
 
@@ -63,18 +64,22 @@ export default class AlertComponent extends React.Component {
             <Components.NT.View style={[
                 {
                     position: 'relative',
-                    width: '100%',
-                    height: 130,
+                    width: '75%',
+                    height: 55,
                     backgroundColor: '#FFFFFF',
                     borderWidth: 2,
                     borderColor: type.borderColor,
                     borderRadius: 10,
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    top: StylesScreen.createHeight('auto').height / 4,
                 },
             ]}>
                 <Components.NT.View style={{
                     position: 'absolute',
                     width: 50,
-                    height: 130,
+                    height: 55,
                     left: -2,
                     top: -2,
                     alignSelf: 'center',
@@ -88,40 +93,25 @@ export default class AlertComponent extends React.Component {
                 </Components.NT.View>
                 <Components.NT.View style={{
                     position: 'absolute',
-                    width: 379,
+                    width: 50,
                     height: 152,
-                    left: 70,
+                    left: 50,
                     top: 0,
                     borderRadius: 10,
                 }}>
                     <Components.NT.View style={{
                         position: 'absolute',
                         width: 200,
-                        height: 56,
-                        left: this.props.title.toString().length <= 6 ? '-15%' : this.props.title.toString().length-44,
-                        top: 13,
-                    }}>
-                        <TextComponent
-                            text={this.props.title.toString().substring(0, 18)}
-                            fontFamily={'Sarabun-Bold'}
-                            color={type.color}
-                            size={20}
-                            upper
-                            lineHeight={47}
-                        />
-                    </Components.NT.View>
-                    <Components.NT.View style={{
-                        position: 'absolute',
-                        width: 281,
                         height: 65,
-                        left: 15,
-                        top: 60,
+                        left: 5,
+                        top: 5,
                     }}>
                         <TextComponent
                             text={this.props.description.toString().substring(0, 70)}
                             fontFamily={'Sarabun-Bold'}
                             color={type.color}
-                            size={16}
+                            size={14}
+                            upper
                             lineHeight={23}
                         />
                     </Components.NT.View>
@@ -130,7 +120,7 @@ export default class AlertComponent extends React.Component {
                     position: 'absolute',
                     width: 40,
                     height: 52,
-                    left: '85%',
+                    left: '83%',
                     top: 0,
                 }}>
                     <Components.NT.View style={{
@@ -143,7 +133,7 @@ export default class AlertComponent extends React.Component {
                         <Components.Icon onPress={() => this.onClose()}>
                             <Components.EvilIcons
                                 name={'close'}
-                                size={30}
+                                size={25}
                                 color={'#C1B4B4'}
                             />
                         </Components.Icon>

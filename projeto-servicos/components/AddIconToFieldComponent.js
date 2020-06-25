@@ -10,9 +10,9 @@ export default class AddIconToFieldComponent extends React.Component{
                 right: this.props.right !== undefined ? 1 : null,
                 left: this.props.left !== undefined ? 1 : null,
             }}>
-                <RowComponent style={{top: 10}}>
+                <RowComponent>
                     {this.props.icon}
-                    <Components.NT.View style={{marginLeft: 2,}}>
+                    <Components.NT.View>
                         {this.props.text}
                     </Components.NT.View>
                 </RowComponent>

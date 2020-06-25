@@ -21,11 +21,19 @@ export default class LoginComponent extends React.Component{
 
     state={
         visible: false,
+        buttonValid: false,
+    }
+
+    onStop = async ()=>{
+        this.setState({
+            ...this.state.buttonValid = false,
+        });
     }
 
     onAlert = async ()=>{
         this.setState({
-            ...this.state.visible = true,
+            ...this.state.buttonValid = true,
+            visible: true,
         });
     }
 
@@ -74,27 +82,20 @@ export default class LoginComponent extends React.Component{
                         <BoxInputComponent style={{top: 60}}>
                             <BoxContainerItemComponent>
                                 <InputComponent
+                                    onStop={this.onStop}
+                                    valid={this.state.buttonValid}
                                     placeholder={'E-mail'}
                                 />
                                 {this.props.iconUsername}
-                                <AddIconToFieldComponent
-                                    right
-                                    text={<TextComponent fontFamily={'Sarabun-Bold'} upper size={10} color={'#EA6A6A'} text={'Campo Obrigatório!'}/>}
-                                    icon={<Components.Icon><Components.Feather name={'alert-triangle'} size={18}
-                                                                               color={'#EA6A6A'}/></Components.Icon>}
-                                />
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
                         <BoxInputComponent style={{top: 130}}>
                             <BoxContainerItemComponent>
-                                <InputComponent secureTextEntry placeholder={'Senha'}></InputComponent>
+                                <InputComponent onStop={this.onStop}
+                                                valid={this.state.buttonValid}
+                                                secureTextEntry
+                                                placeholder={'Senha'}></InputComponent>
                                 {this.props.iconPassword}
-                                <AddIconToFieldComponent
-                                    right
-                                    text={<TextComponent fontFamily={'Sarabun-Bold'} upper size={10} color={'#EA6A6A'} text={'Campo Obrigatório!'}/>}
-                                    icon={<Components.Icon><Components.Feather name={'alert-triangle'} size={18}
-                                                                               color={'#EA6A6A'}/></Components.Icon>}
-                                />
                             </BoxContainerItemComponent>
                         </BoxInputComponent>
                         <BoxLoginButton>
